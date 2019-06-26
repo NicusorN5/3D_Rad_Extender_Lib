@@ -37,3 +37,13 @@ void DLLEXPORT MSGBOX(float *args)
 	delete[] message;
 	delete[] title;
 }
+
+void DLLEXPORT HideMouseCursor(float* atgs)
+{
+	ShowCursor(false);
+}
+
+void DLLEXPORT ShowMouseCursor(float* atgs)
+{
+	ShowCursor(true);
+}

@@ -6,4 +6,6 @@ extern "C"
 {
 	void DLLEXPORT MyFunction(float *args);
 	void DLLEXPORT MSGBOX(float *args);
+	void DLLEXPORT HideMouseCursor(float *args);
+	void DLLEXPORT ShowMouseCursor(float *args);
 }
