@@ -10,10 +10,25 @@ void DLLEXPORT MyFunction(float *args)
 }
 void DLLEXPORT MSGBOX(float *args)
 {
+	ShowMessageBoxFlags(args, MB_OK + MB_ICONINFORMATION);
+}
+
+void DLLEXPORT HideMouseCursor(float* atgs)
+{
+	ShowCursor(false);
+}
+
+void DLLEXPORT ShowMouseCursor(float* atgs)
+{
+	ShowCursor(true);
+}
+
+void ShowMessageBoxFlags(float *args, int flag)
+{
 	char *message = new char[255];
 	char *title = new char[255];
 	int i;
-	for (i =0 ; i < 255; i++)
+	for (i = 0; i < 255; i++)
 	{
 		if ((int)args[i]) message[i] = (int)args[i];
 		else
@@ -33,17 +48,31 @@ void DLLEXPORT MSGBOX(float *args)
 			break;
 		}
 	}
-	MessageBoxA(nullptr, message, title, MB_OK + MB_ICONINFORMATION);
+	MessageBoxA(nullptr, message, title, flag);
 	delete[] message;
 	delete[] title;
 }
-
-void DLLEXPORT HideMouseCursor(float* atgs)
+void DLLEXPORT ShowMsgBoxOK(float *args)
 {
-	ShowCursor(false);
+	ShowMessageBoxFlags(args, MB_OK);
 }
-
-void DLLEXPORT ShowMouseCursor(float* atgs)
+void DLLEXPORT ShowMsgBoxOKInform(float *args)
 {
-	ShowCursor(true);
+	ShowMessageBoxFlags(args, MB_OK+MB_ICONINFORMATION);
+}
+void DLLEXPORT ShowMsgBoxOKWarn(float *args)
+{
+	ShowMessageBoxFlags(args, MB_OK + MB_ICONWARNING);
+}
+void DLLEXPORT ShowMsgBoxYesNo(float *args)
+{
+	ShowMessageBoxFlags(args, MB_YESNO);
+}
+void DLLEXPORT ShowMsgBoxYesNoCancel(float *args)
+{
+	ShowMessageBoxFlags(args, MB_YESNOCANCEL);
+}
+void DLLEXPORT ShowMsgBoxRetryCancel(float *args)
+{
+	ShowMessageBoxFlags(args, MB_RETRYCANCEL);
 }
