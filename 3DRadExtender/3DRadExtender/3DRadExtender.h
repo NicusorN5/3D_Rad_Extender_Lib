@@ -14,5 +14,6 @@ extern "C"
 	void DLLEXPORT ShowMsgBoxYesNo(float *args);
 	void DLLEXPORT ShowMsgBoxYesNoCancel(float *args);
 	void DLLEXPORT ShowMsgBoxRetryCancel(float *args);
+	void DLLEXPORT ShowMessageBox(float *args);
 }
 void ShowMessageBoxFlags(float *args, int flag);

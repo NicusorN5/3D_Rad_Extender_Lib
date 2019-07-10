@@ -76,3 +76,8 @@ void DLLEXPORT ShowMsgBoxRetryCancel(float *args)
 {
 	ShowMessageBoxFlags(args, MB_RETRYCANCEL);
 }
+void DLLEXPORT ShowMessageBox(float *args)
+{
+	int flag = (int)args[0];
+	ShowMessageBoxFlags(args + 1, flag);
+}
