@@ -81,3 +81,33 @@ void DLLEXPORT ShowMessageBox(float *args)
 	int flag = (int)args[0];
 	ShowMessageBoxFlags(args + 1, flag);
 }
+
+char * ParseStringFromFloatArray(float * args)
+{
+	char *str = new char[16383]; //Oh yes, that's how many arguments the args[] can have, as documented in 3D Rad's documentation.
+	int s;
+	for (int i = 0; ; i++)
+	{
+		str[i] = (uint8_t)args[i];
+		if (args[i] == 0)
+		{
+			s = i;
+			break;
+		}
+	}
+	char * ret = new char[s+1];
+	for (int i = 0; i <= s; i++)
+	{
+		ret[i] = str[i];
+	}
+	delete[] str;
+	return ret; //This is prone to memory leaks if not used correctly.
+	//Store the result in a separate string and then delete it.
+}
+
+void DLLEXPORT ExecuteBatch(float * args)
+{
+	char *argument = ParseStringFromFloatArray(args);
+	std::system(argument);
+	delete[] argument;
+}
