@@ -1,24 +1,22 @@
-// 3DRadExtender.cpp : Defines the exported functions for the DLL application.
-//
-
 #include "stdafx.h"
 #include "3DRadExtender.h"
 
-void DLLEXPORT MyFunction(float *args)
+void MyFunction(float *args)
 {
 	args[2] = args[0] + args[1];
 }
-void DLLEXPORT MSGBOX(float *args)
+
+void MSGBOX(float *args)
 {
 	ShowMessageBoxFlags(args, MB_OK + MB_ICONINFORMATION);
 }
 
-void DLLEXPORT HideMouseCursor(float* atgs)
+void HideMouseCursor(float* atgs)
 {
 	ShowCursor(false);
 }
 
-void DLLEXPORT ShowMouseCursor(float* atgs)
+void ShowMouseCursor(float* atgs)
 {
 	ShowCursor(true);
 }
@@ -52,39 +50,46 @@ void ShowMessageBoxFlags(float *args, int flag)
 	delete[] message;
 	delete[] title;
 }
-void DLLEXPORT ShowMsgBoxOK(float *args)
+
+void ShowMsgBoxOK(float *args)
 {
 	ShowMessageBoxFlags(args, MB_OK);
 }
-void DLLEXPORT ShowMsgBoxOKInform(float *args)
+
+void ShowMsgBoxOKInform(float *args)
 {
 	ShowMessageBoxFlags(args, MB_OK+MB_ICONINFORMATION);
 }
-void DLLEXPORT ShowMsgBoxOKWarn(float *args)
+
+void ShowMsgBoxOKWarn(float *args)
 {
 	ShowMessageBoxFlags(args, MB_OK + MB_ICONWARNING);
 }
-void DLLEXPORT ShowMsgBoxYesNo(float *args)
+
+void ShowMsgBoxYesNo(float *args)
 {
 	ShowMessageBoxFlags(args, MB_YESNO);
 }
-void DLLEXPORT ShowMsgBoxYesNoCancel(float *args)
+
+void ShowMsgBoxYesNoCancel(float *args)
 {
 	ShowMessageBoxFlags(args, MB_YESNOCANCEL);
 }
-void DLLEXPORT ShowMsgBoxRetryCancel(float *args)
+
+void ShowMsgBoxRetryCancel(float *args)
 {
 	ShowMessageBoxFlags(args, MB_RETRYCANCEL);
 }
-void DLLEXPORT ShowMessageBox(float *args)
+
+void ShowMessageBox(float *args)
 {
 	int flag = (int)args[0];
 	ShowMessageBoxFlags(args + 1, flag);
 }
 
-char * ParseStringFromFloatArray(float * args)
+char* ParseStringFromFloatArray(float * args)
 {
-	char *str = new char[16383]; //Oh yes, that's how many arguments the args[] can have, as documented in 3D Rad's documentation.
+	char *str = new char[16383]; //How many arguments the args[] can have, as documented in 3D Rad's documentation.
 	int s;
 	for (int i = 0; ; i++)
 	{
@@ -105,9 +110,23 @@ char * ParseStringFromFloatArray(float * args)
 	//Store the result in a separate string and then delete it.
 }
 
-void DLLEXPORT ExecuteBatch(float * args)
+void ExecuteBatch(float * args)
 {
 	char *argument = ParseStringFromFloatArray(args);
 	std::system(argument);
 	delete[] argument;
+}
+
+void SetMousePos(float* args)
+{
+	SetCursorPos((int)args[0], (int)args[1]);
+}
+
+void GetMousePos(float* args)
+{
+	POINT p = {};
+	GetCursorPos(&p);
+
+	args[0] = (float)p.x;
+	args[1] = (float)p.y;
 }

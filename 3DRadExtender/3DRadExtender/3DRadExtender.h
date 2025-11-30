@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <fstream>
 #include <stdlib.h>
+
 #define DLLEXPORT __declspec(dllexport)
 extern "C"
 {
@@ -17,6 +18,8 @@ extern "C"
 	void DLLEXPORT ShowMsgBoxRetryCancel(float *args);
 	void DLLEXPORT ShowMessageBox(float *args);
 	void DLLEXPORT ExecuteBatch(float *args);
+	void DLLEXPORT SetMousePos(float* args);
+	void DLLEXPORT GetMousePos(float* args);
 }
 void ShowMessageBoxFlags(float *args, int flag);
 char* ParseStringFromFloatArray(float * args);

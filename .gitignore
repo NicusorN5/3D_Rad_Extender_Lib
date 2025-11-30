@@ -5,3 +5,7 @@
 *.exp
 *.ilk
 *.db
+
+/3DRadExtender/.vs
+/3DRadExtender/3DRadExtender/x64
+/3DRadExtender/3DRadExtender/Release
